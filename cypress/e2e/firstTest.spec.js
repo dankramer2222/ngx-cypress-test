@@ -28,7 +28,7 @@ describe('First test suite',()=>{
         cy.get('[data-cy="imputEmail1"]')
     })
 
-    it.only('second test',()=>{
+    it('second test',()=>{
         // code of the test 
         //Theory
         //get() - find elements on the web page globally
@@ -57,10 +57,25 @@ describe('First test suite',()=>{
 
     })
 
-    it('third test',()=>{
-        // code of the test
+    it.only('save subject of the command',()=>{
+        cy.visit('/')
+        cy.contains('Forms').click()
+        cy.contains('Form Layouts').click()
+
+        // cy.contains('nb-card','Using the Grid').find('[for="inputEmail1"]').should('contain','Email')
+        // cy.contains('nb-card','Using the Grid').find('[class="label col-sm-3 col-form-label"]').should('contain','Password')
+
+        // 1 Cypress Alias
+        cy.contains('nb-card','Using the Grid').as('usingTheGrid')
+        cy.get('@usingTheGrid').find('[for="inputEmail1"]').should('contain','Email')
+        cy.get('@usingTheGrid').find('[class="label col-sm-3 col-form-label"]').should('contain','Password')
+        // 2 Using the Cypress then() methods
+        cy.contains('nb-card','Using the Grid').then(UsingTheGridForm =>{
+            cy.wrap(UsingTheGridForm).find('[for="inputEmail1"]').should('contain','Email')
+            cy.wrap(UsingTheGridForm).find('[class="label col-sm-3 col-form-label"]').should('contain','Password')
+        })
     })
-    
+
 })
 
 // describe('Second test suite',()=>{

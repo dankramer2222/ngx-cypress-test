@@ -28,8 +28,33 @@ describe('First test suite',()=>{
         cy.get('[data-cy="imputEmail1"]')
     })
 
-    it('second test',()=>{
-        // code of the test
+    it.only('second test',()=>{
+        // code of the test 
+        //Theory
+        //get() - find elements on the web page globally
+        //find() - find child elements by locator
+        //contains() - find Html text and by text and locator
+
+        cy.visit('/')
+        cy.contains('Forms').click()
+        cy.contains('Form Layouts').click()
+        //ex1
+        cy.contains('Sign in')
+        cy.contains('[status="warning"]','Sign in')
+        //ex2 
+        cy.contains('nb-card','Horizontal form').find('button')
+        //ex3
+        cy.contains('nb-card','Horizontal form').contains('Sign in')
+
+        //cypress chains and DOM
+        cy.get("#inputEmail3")
+            .parents('form')
+            .find('button')
+            .should('contain', 'Sign in')
+            .parents('form')
+            .find('nb-checkbox')
+            .click()
+
     })
 
     it('third test',()=>{
